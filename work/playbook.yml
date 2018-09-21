@@ -1,0 +1,20 @@
+- hosts: openwisp2
+  become: "{{ become | default('yes') }}"
+  roles:
+    - openwisp.openwisp2
+  vars:
+    openwisp2_default_from_email: "your@email"
+    openwisp2_python: /usr/bin/python2.7
+    openwisp2_path: /opt/work/openwisp2
+    openwisp2_database:
+        engine: "django.contrib.gis.db.backends.mysql"
+        name: ""
+        user: ""
+        password: ""
+        host: ""
+        port: ""
+    openwisp2_install_ntp: true
+    openwisp2_admin_allowed_network: null
+
+
+

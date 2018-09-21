@@ -1,0 +1,31 @@
+version: '2'
+
+services:
+    openwisp2:
+        build: .
+        tmpfs:
+                - /run
+                - /run/lock
+                - /tmp
+        volumes:
+                - /sys/fs/cgroup:/sys/fs/cgroup:ro
+                - ./work:/opt/work
+        security_opt:
+                - seccomp:unconfined
+        cap_add:
+          - SYS_ADMIN
+        networks:
+            vmsrvnet:
+                ipv4_address: 172.20.1.10
+
+networks:
+    vmsrvnet:
+        driver: bridge
+        driver_opts:
+            com.docker.network.enable_ipv6: "false"
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.20.1.10/24
+                  gateway: 172.20.1.1
+
